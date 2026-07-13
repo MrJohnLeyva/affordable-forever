@@ -162,6 +162,9 @@ description: Every LIHTC building in New York has an expiration date. Most tenan
   <div class="loader">
     <h3>Load the real data</h3>
     <p>
+      <strong>Your search never leaves your computer.</strong> This lookup runs entirely in your own
+      browser — nothing is uploaded, nothing is logged, and we never see the address you typed.
+      <br><br>
       This page is running on a small sample. To load the full New York dataset: register free at
       preservationdatabase.org, filter to <b>New York, LIHTC, active</b>, export the CSV, and drop it here.
       Nothing is uploaded anywhere — it is read in your browser.
@@ -191,7 +194,7 @@ description: Every LIHTC building in New York has an expiration date. Most tenan
         If your LIHTC agreement is expiring, tell us. We are building the list that should already exist.
       </p>
     </div>
-    <form name="building" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <form name="building" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="building">
       <p hidden><label>Skip: <input name="bot-field"></label></p>
       <label for="addr">Your building's address</label>

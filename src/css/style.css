@@ -113,3 +113,38 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
   .pull{font-size:19px;padding:22px}
   .section{padding:52px 0}
 }
+
+
+/* ---- accessibility ----
+   Most of the people this site is for are older, and many are disabled.
+   This is not decoration. It is the audience. */
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--gold);color:#111827;font-weight:800;
+  padding:14px 22px;border-radius:0 0 12px 0;text-decoration:none;
+}
+.skip:focus{left:0}
+
+/* Bigger, easier tap targets — arthritic hands, phone screens, older eyes */
+@media(max-width:900px){
+  .btn{padding:16px 26px;font-size:16px}
+  .nav-links a{padding:10px 0}
+  input,select,textarea{font-size:16px;padding:15px 16px}  /* 16px stops iOS zooming on focus */
+  .link h3 a,.org h4 a{padding:4px 0;display:inline-block}
+}
+
+/* Respect people who get motion sickness */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+
+/* Respect people who need high contrast */
+@media(prefers-contrast:more){
+  body{color:#000}
+  .lead,.card p,.stat .l{color:#1a2332}
+  .card,.stat{border-color:#94a3b8}
+}
+
+/* Never hide the focus ring. Some people navigate entirely by keyboard. */
+*:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
