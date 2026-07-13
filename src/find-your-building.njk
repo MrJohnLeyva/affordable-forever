@@ -1,0 +1,337 @@
+---
+layout: base.njk
+title: Find your building
+description: Every LIHTC building in New York has an expiration date. Most tenants have never been told theirs.
+---
+
+<style>
+
+  header.top{background:var(--navy);color:#fff;padding:56px 0 44px}
+  .eyebrow{display:inline-block;background:#ffffff14;padding:8px 14px;border-radius:999px;
+    font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  h1{font-size:44px;line-height:1.1;font-weight:800;margin:18px 0 0;max-width:16ch}
+  h1 span{color:var(--gold)}
+  .lede{margin-top:18px;font-size:19px;line-height:1.7;color:#dbe4f0;max-width:62ch}
+
+  .searchbar{margin-top:30px;display:flex;gap:10px;flex-wrap:wrap}
+  .searchbar input{
+    flex:1;min-width:260px;padding:16px 18px;border-radius:14px;border:none;
+    font-family:inherit;font-size:16px;
+  }
+  .searchbar input:focus{outline:3px solid var(--gold)}
+  .searchbar select{
+    padding:16px;border-radius:14px;border:none;font-family:inherit;font-size:15px;background:#fff;
+  }
+
+  /* stats strip */
+  .strip{background:#fff;border-bottom:1px solid var(--line);padding:28px 0}
+  .strip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .kpi .n{font-size:34px;font-weight:800;color:var(--navy);line-height:1}
+  .kpi .n.red{color:var(--red)}
+  .kpi .l{font-size:13px;color:var(--slate);margin-top:6px;line-height:1.4}
+
+  main{padding:44px 0 80px}
+  .bar{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px}
+  h2{font-size:26px;font-weight:800;color:var(--navy)}
+  .count{font-size:14px;color:var(--slate)}
+
+  /* timeline chart */
+  .chart{background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px;margin-top:18px}
+  .chart h3{font-size:17px;color:var(--navy);margin-bottom:4px}
+  .chart .sub{font-size:13px;color:var(--slate);margin-bottom:20px}
+  .bars{display:flex;align-items:flex-end;gap:6px;height:170px}
+  .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;height:100%}
+  .col .b{width:100%;background:var(--navy);border-radius:6px 6px 0 0;min-height:3px;
+    transition:background .15s}
+  .col.past .b{background:#94a3b8}
+  .col.soon .b{background:var(--red)}
+  .col:hover .b{background:var(--gold)}
+  .col .y{font-size:11px;color:var(--slate);font-weight:600}
+  .col .v{font-size:11px;color:var(--navy);font-weight:700}
+
+  /* results */
+  .results{margin-top:34px;display:grid;gap:12px}
+  .b-card{
+    background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 22px;
+    display:grid;grid-template-columns:88px 1fr auto;gap:20px;align-items:center;
+  }
+  .b-card.expired{border-left:5px solid var(--red)}
+  .b-card.soon{border-left:5px solid var(--gold)}
+  .yearbox{text-align:center}
+  .yearbox .y{font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+  .yearbox .lab{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-top:4px}
+  .b-card.expired .yearbox .y{color:var(--red)}
+  .b-name{font-size:18px;font-weight:700;color:var(--ink)}
+  .b-addr{font-size:14px;color:var(--slate);margin-top:3px}
+  .b-meta{font-size:13px;color:var(--slate);margin-top:8px;display:flex;gap:14px;flex-wrap:wrap}
+  .pill{background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-weight:600}
+  .pill.forprofit{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+  .pill.nonprofit{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
+  .btn{
+    background:var(--gold);color:#111827;border:none;border-radius:12px;
+    padding:12px 18px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap;
+  }
+  .btn:hover{background:#ffca4d}
+  .btn-navy{background:var(--navy);color:#fff}
+  .btn-navy:hover{background:#27498a}
+
+  .empty{background:#fff;border:1px dashed var(--line);border-radius:18px;padding:40px;text-align:center;color:var(--slate)}
+  .empty b{color:var(--ink)}
+
+  /* loader */
+  .loader{background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px;margin-top:34px}
+  .loader h3{font-size:17px;color:var(--navy)}
+  .loader p{font-size:14px;color:var(--slate);margin-top:8px;line-height:1.65}
+  .loader input[type=file]{margin-top:14px;font-size:14px}
+  .note{
+    margin-top:34px;background:#fffbeb;border:1px solid #fde68a;border-radius:16px;padding:18px 20px;
+    font-size:14px;color:#78350f;line-height:1.7;
+  }
+  .note b{display:block;margin-bottom:4px}
+
+  /* join */
+  .join{background:var(--navy);color:#fff;padding:56px 0;margin-top:0}
+  .join-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .join h2{color:#fff;font-size:32px}
+  .join p{color:#dbe4f0;margin-top:14px;font-size:16px;line-height:1.75}
+  form{background:#ffffff10;border:1px solid #ffffff1f;border-radius:22px;padding:26px}
+  label{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b9c9e0;margin:14px 0 6px}
+  input[type=text],input[type=email],textarea{
+    width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;
+    background:#ffffff0f;color:#fff;font-family:inherit;font-size:15px;
+  }
+  input:focus,textarea:focus{outline:2px solid var(--gold)}
+  form .btn{width:100%;margin-top:20px;padding:14px}
+
+  @media(max-width:900px){
+    .strip-grid{grid-template-columns:repeat(2,1fr)}
+    .join-grid{grid-template-columns:1fr}
+    .b-card{grid-template-columns:70px 1fr;gap:14px}
+    .b-card .btn{grid-column:2;justify-self:start}
+    h1{font-size:32px}
+    .bars{height:130px}
+    .col .v{display:none}
+  }
+
+</style>
+
+
+<header class="top">
+  <div class="container">
+    <div class="eyebrow">Affordable Forever — The Expiration Registry</div>
+    <h1>Every LIHTC building in New York has an <span>expiration date</span>.</h1>
+    <p class="lede">
+      Most tenants have never been told theirs. Find your building, find your date,
+      and find the other buildings whose clock runs out the same year as yours.
+    </p>
+    <div class="searchbar">
+      <input id="q" type="search" placeholder="Search by address or building name — e.g. Tiffany Place" autocomplete="off">
+      <select id="boro">
+        <option value="">All boroughs</option>
+        <option>Brooklyn</option><option>Bronx</option><option>Manhattan</option>
+        <option>Queens</option><option>Staten Island</option>
+      </select>
+      <select id="win">
+        <option value="">Any year</option>
+        <option value="expired">Already expired</option>
+        <option value="5">Expiring within 5 years</option>
+        <option value="10">Expiring within 10 years</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="container strip-grid" id="kpis"></div>
+</div>
+
+<main class="container">
+
+  <div class="chart">
+    <h3>When New York's affordability runs out</h3>
+    <div class="sub">LIHTC properties by scheduled expiration year. Red = within five years. Grey = already gone.</div>
+    <div class="bars" id="bars"></div>
+  </div>
+
+  <div class="bar" style="margin-top:40px">
+    <h2>Buildings</h2>
+    <div class="count" id="count"></div>
+  </div>
+  <div class="results" id="results"></div>
+
+  <div class="loader">
+    <h3>Load the real data</h3>
+    <p>
+      <strong>Your search never leaves your computer.</strong> This lookup runs entirely in your own
+      browser — nothing is uploaded, nothing is logged, and we never see the address you typed.
+      <br><br>
+      This page is running on a small sample. To load the full New York dataset: register free at
+      preservationdatabase.org, filter to <b>New York, LIHTC, active</b>, export the CSV, and drop it here.
+      Nothing is uploaded anywhere — it is read in your browser.
+    </p>
+    <input type="file" id="csv" accept=".csv">
+  </div>
+
+  <div class="note">
+    <b>How these dates are calculated — read this before quoting a number.</b>
+    The NHPD estimates a LIHTC expiration by adding 30 years to the year the property was placed in service.
+    That is an assumption, not a filed date. It will be too early where the state required a longer term, and
+    too late where an owner exited early through the qualified contract loophole. Treat every date here as a
+    starting point for a conversation with your housing agency — not as legal advice. <a href="/methodology/" style="color:#78350f;font-weight:800">Read the full methodology →</a>
+  </div>
+</main>
+
+<section class="join">
+  <div class="container join-grid">
+    <div>
+      <h2>Is your building on this list?</h2>
+      <p>
+        There are hundreds of buildings in this city in exactly the same position, and almost none of
+        them know about each other. Each one thinks it has a landlord problem. It doesn't — it has a
+        program problem, and there are hundreds of us.
+      </p>
+      <p>
+        If your LIHTC agreement is expiring, tell us. We are building the list that should already exist.
+      </p>
+    </div>
+    <form name="building" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="building">
+      <p hidden><label>Skip: <input name="bot-field"></label></p>
+      <label for="addr">Your building's address</label>
+      <input id="addr" name="address" type="text" required>
+      <label for="nm">Your name</label>
+      <input id="nm" name="name" type="text" required>
+      <label for="em">Email</label>
+      <input id="em" name="email" type="email" required>
+      <label for="st">What's happening in your building?</label>
+      <textarea id="st" name="story" rows="4" placeholder="Expiration date, landlord, whether you have a tenants association…"></textarea>
+      <button class="btn" type="submit">Add my building</button>
+    </form>
+  </div>
+</section>
+
+
+
+<script>
+// ---------------------------------------------------------------
+// SAMPLE DATA. Replace by dropping in the real NHPD CSV export.
+// 63 Tiffany is real and documented. The rest are illustrative.
+// ---------------------------------------------------------------
+let DATA = [
+  {name:"63 Tiffany Place", addr:"63 Tiffany Pl, Brooklyn NY 11231", boro:"Brooklyn",
+   units:70, year:2025, owner:"For-profit", cd:"BK-33", real:true},
+  {name:"Sample — Sunset Park property", addr:"Brooklyn NY", boro:"Brooklyn", units:120, year:2027, owner:"For-profit", cd:"BK-38"},
+  {name:"Sample — Mott Haven property", addr:"Bronx NY", boro:"Bronx", units:88, year:2028, owner:"Non-profit", cd:"BX-08"},
+  {name:"Sample — Harlem property", addr:"Manhattan NY", boro:"Manhattan", units:210, year:2029, owner:"For-profit", cd:"MN-09"},
+  {name:"Sample — Jamaica property", addr:"Queens NY", boro:"Queens", units:64, year:2030, owner:"Non-profit", cd:"QN-27"},
+  {name:"Sample — Stapleton property", addr:"Staten Island NY", boro:"Staten Island", units:40, year:2031, owner:"For-profit", cd:"SI-49"},
+  {name:"Sample — Bed-Stuy property", addr:"Brooklyn NY", boro:"Brooklyn", units:150, year:2026, owner:"For-profit", cd:"BK-36"},
+  {name:"Sample — Fordham property", addr:"Bronx NY", boro:"Bronx", units:95, year:2033, owner:"Non-profit", cd:"BX-15"}
+];
+
+const NOW = new Date().getFullYear();
+const $ = id => document.getElementById(id);
+
+function filtered(){
+  const q = $('q').value.trim().toLowerCase();
+  const b = $('boro').value, w = $('win').value;
+  return DATA.filter(d=>{
+    if(q && !(d.name+' '+d.addr).toLowerCase().includes(q)) return false;
+    if(b && d.boro !== b) return false;
+    if(w === 'expired' && d.year > NOW) return false;
+    if(w === '5'  && !(d.year >= NOW && d.year <= NOW+5))  return false;
+    if(w === '10' && !(d.year >= NOW && d.year <= NOW+10)) return false;
+    return true;
+  }).sort((a,b)=>a.year-b.year);
+}
+
+function render(){
+  const rows = filtered();
+
+  // KPIs
+  const soon = DATA.filter(d=>d.year>=NOW && d.year<=NOW+10);
+  const gone = DATA.filter(d=>d.year<NOW);
+  const fp   = DATA.filter(d=>d.owner==="For-profit");
+  const sum  = a => a.reduce((s,d)=>s+(d.units||0),0);
+  $('kpis').innerHTML = `
+    <div class="kpi"><div class="n">${DATA.length.toLocaleString()}</div><div class="l">buildings in this dataset</div></div>
+    <div class="kpi"><div class="n red">${sum(soon).toLocaleString()}</div><div class="l">homes expiring in the next 10 years</div></div>
+    <div class="kpi"><div class="n">${sum(gone).toLocaleString()}</div><div class="l">homes whose term has already run out</div></div>
+    <div class="kpi"><div class="n">${Math.round(fp.length/DATA.length*100)}%</div><div class="l">for-profit owned — the group most likely to exit</div></div>`;
+
+  // chart
+  const years = {};
+  DATA.forEach(d => years[d.year] = (years[d.year]||0) + (d.units||0));
+  const keys = Object.keys(years).map(Number).sort();
+  const max = Math.max(...Object.values(years), 1);
+  $('bars').innerHTML = keys.map(y=>{
+    const v = years[y], h = Math.round(v/max*100);
+    const cls = y < NOW ? 'past' : (y <= NOW+5 ? 'soon' : '');
+    return `<div class="col ${cls}" title="${y}: ${v.toLocaleString()} homes">
+      <div class="v">${v.toLocaleString()}</div>
+      <div class="b" style="height:${h}%"></div>
+      <div class="y">'${String(y).slice(2)}</div></div>`;
+  }).join('');
+
+  // results
+  $('count').textContent = `${rows.length} shown of ${DATA.length}`;
+  $('results').innerHTML = rows.length ? rows.map(d=>{
+    const st = d.year < NOW ? 'expired' : (d.year <= NOW+5 ? 'soon' : '');
+    const lab = d.year < NOW ? 'Expired' : 'Expires';
+    const oc = d.owner === 'Non-profit' ? 'nonprofit' : 'forprofit';
+    return `<div class="b-card ${st}">
+      <div class="yearbox"><div class="y">${d.year}</div><div class="lab">${lab}</div></div>
+      <div>
+        <div class="b-name">${d.name}${d.real?' ✓':''}</div>
+        <div class="b-addr">${d.addr}</div>
+        <div class="b-meta">
+          <span class="pill">${(d.units||'?')} homes</span>
+          <span class="pill ${oc}">${d.owner||'Unknown owner'}</span>
+          ${d.cd?`<span class="pill">${d.cd}</span>`:''}
+        </div>
+      </div>
+      <button class="btn btn-navy" onclick="document.getElementById('addr').value='${d.addr.replace(/'/g,"")}';document.getElementById('addr').scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('addr').focus()">I live here</button>
+    </div>`;
+  }).join('') : `<div class="empty"><b>No buildings match that search.</b><br>
+      If your building isn't here, it may still be affected — add it below.</div>`;
+}
+
+// CSV loader — maps common NHPD column names, tolerant of variations
+$('csv').addEventListener('change', e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    const lines = ev.target.result.split(/\r?\n/).filter(Boolean);
+    const head = lines[0].split(',').map(h=>h.replace(/"/g,'').trim().toLowerCase());
+    const idx = names => names.map(n=>head.indexOf(n)).find(i=>i>-1) ?? -1;
+    const iName=idx(['propertyname','property_name','name']),
+          iAddr=idx(['propertyaddress','address','property_address']),
+          iCity=idx(['city','county']),
+          iUnit=idx(['totalunits','total_units','units','assistedunits']),
+          iEnd =idx(['latestendyear','earliestendyear','subsidy_end_year','latest_end_date','earliestenddate']),
+          iOwn =idx(['ownertype','owner_type','owner']);
+    const out=[];
+    for(let i=1;i<lines.length;i++){
+      const c = lines[i].match(/("[^"]*"|[^,]+)/g)||[];
+      const cell = j => j>-1 && c[j] ? c[j].replace(/"/g,'').trim() : '';
+      const yr = parseInt((cell(iEnd).match(/\d{4}/)||[])[0]);
+      if(!yr) continue;
+      out.push({
+        name: cell(iName)||'Unnamed property',
+        addr: cell(iAddr)||cell(iCity),
+        boro: cell(iCity),
+        units: parseInt(cell(iUnit))||0,
+        year: yr,
+        owner: /non|not.?for/i.test(cell(iOwn)) ? 'Non-profit' : 'For-profit'
+      });
+    }
+    if(out.length){ DATA = out; render();
+      alert(`Loaded ${out.length} properties. Check the chart and spot-check a few rows against the source.`); }
+    else alert("Couldn't find an expiration year column. Send me the CSV header row and I'll fix the mapping.");
+  };
+  r.readAsText(f);
+});
+
+['q','boro','win'].forEach(id => $(id).addEventListener('input', render));
+render();
+</script>

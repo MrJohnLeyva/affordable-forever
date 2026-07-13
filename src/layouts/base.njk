@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }} — Affordable Forever</title>
+<meta name="description" content="{{ description or site.description }}">
+
+<meta property="og:type" content="{% if '/articles/2' in page.url %}article{% else %}website{% endif %}">
+<meta property="og:site_name" content="Affordable Forever">
+<meta property="og:locale" content="en_US">
+<meta name="theme-color" content="#1f3b6d">
+<meta property="og:title" content="{{ title }} — Affordable Forever">
+<meta property="og:description" content="{{ description or site.description }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:image" content="{{ site.url }}/images/social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Save63Tiffany">
+<meta name="twitter:title" content="{{ title }} — Affordable Forever">
+<meta name="twitter:description" content="{{ description or site.description }}">
+<meta name="twitter:image" content="{{ site.url }}/images/social-card.jpg">
+{% if '/articles/2' in page.url %}
+<meta property="article:published_time" content="{{ date | isoDate }}">
+<meta property="article:author" content="{{ author or 'Affordable Forever' }}">
+{% endif %}
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Affordable Forever" href="/feed.xml">
+<link rel="stylesheet" href="/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ site.url }}/#org",
+      "name": "Affordable Forever",
+      "url": "{{ site.url }}",
+      "email": "affordableforeverinitiative@gmail.com",
+      "description": "A tenant-led campaign documenting the Low-Income Housing Tax Credit (LIHTC) expiration crisis in New York, and fighting for permanent affordability.",
+      "areaServed": { "@type": "State", "name": "New York" },
+      "sameAs": ["https://save63tiffany.com"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#site",
+      "url": "{{ site.url }}",
+      "name": "Affordable Forever",
+      "description": "{{ site.description }}",
+      "publisher": { "@id": "{{ site.url }}/#org" },
+      "inLanguage": "en-US"
+    }{% if '/articles/2' in page.url %},
+    {
+      "@type": "NewsArticle",
+      "headline": {{ title | dump | safe }},
+      "description": {{ description | dump | safe }},
+      "datePublished": "{{ date | isoDate }}",
+      "dateModified": "{{ date | isoDate }}",
+      "author": { "@type": "Person", "name": "{{ author or 'A tenant of 63 Tiffany Place' }}" },
+      "publisher": { "@id": "{{ site.url }}/#org" },
+      "mainEntityOfPage": "{{ site.url }}{{ page.url }}",
+      "image": "{{ site.url }}/images/social-card.jpg"
+    }{% endif %}
+  ]
+}
+</script>
+{% if faq %}{{ faq | safe }}{% endif %}
+{% if extraCSS %}<style>{{ extraCSS | safe }}</style>{% endif %}
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+
+<nav class="nav">
+  <div class="container nav-in">
+    <a href="/" class="mark">Affordable For<em>ever</em></a>
+    <ul class="nav-links">
+      <li><a href="/find-your-building/" {% if page.url == '/find-your-building/' %}class="on"{% endif %}>Find Your Building</a></li>
+      <li><a href="/what-to-do/" {% if page.url == '/what-to-do/' or page.url == '/resources/' %}class="on"{% endif %}>What To Do</a></li>
+      <li><a href="/the-case/" {% if '/the-case/' in page.url or '/what-lihtc-is/' in page.url or '/who-paid/' in page.url or '/community-ownership/' in page.url %}class="on"{% endif %}>The Case</a></li>
+      <li><a href="/read/" {% if '/read/' in page.url or '/articles/' in page.url or '/events/' in page.url or '/reading/' in page.url %}class="on"{% endif %}>Read</a></li>
+      <li><a href="/about/" {% if page.url == '/about/' %}class="on"{% endif %}>About</a></li>
+    </ul>
+    <a href="/#join" class="btn btn-gold btn-sm">Join</a>
+  </div>
+</nav>
+
+<div id="main">
+{{ content | safe }}
+</div>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-mark">Affordable Forever</div>
+        <div class="foot-tag">Affordability shouldn't come with an expiration date.</div>
+        <p style="margin-top:14px;font-size:14px;color:#8fa3c0;max-width:44ch;line-height:1.7">
+          Run by a tenant. Unpaid, unaffiliated, unfunded. Everything here is sourced,
+          and every source is named.
+        </p>
+        <a href="mailto:affordableforeverinitiative@gmail.com" style="display:inline-block;margin-top:14px;color:#fff;font-size:14px;font-weight:700;border-bottom:1px solid var(--gold);text-decoration:none;padding-bottom:2px">affordableforeverinitiative@gmail.com</a>
+      </div>
+      <div>
+        <h4>If your building is expiring</h4>
+        <ul>
+          <li><a href="/find-your-building/">Find your building</a></li>
+          <li><a href="/what-to-do/">What to do</a></li>
+          <li><a href="/resources/">Who to call</a></li>
+          <li><a href="/calculator/">How old will you be?</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>The argument</h4>
+        <ul>
+          <li><a href="/what-lihtc-is/">What LIHTC actually is</a></li>
+          <li><a href="/who-paid/">Who paid for the building</a></li>
+          <li><a href="/community-ownership/">The way out</a></li>
+          <li><a href="/objections/">Every objection, answered</a></li>
+          <li><a href="/read/">Articles &amp; events</a></li>
+          <li><a href="/about/">Who's behind this</a></li>
+          <li><a href="/methodology/">Methodology &amp; press</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>When LIHTC "sunsets," it's doomsday for tenants.</span>
+      <span>Data: National Housing Preservation Database (NLIHC &amp; PAHRC).</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "51c7229a35db4c739fdc2212ee8e4a70"}'></script>
+</body>
+</html>

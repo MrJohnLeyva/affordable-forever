@@ -1,0 +1,150 @@
+:root{
+  --navy:#1f3b6d; --navy-d:#16305c; --gold:#f2b632; --gold-l:#ffca4d;
+  --cream:#f7f3ea; --cream-w:#efe9db; --red:#c0442f;
+  --ink:#0f172a; --slate:#475569; --line:#e2e8f0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:1150px;margin:0 auto;padding:0 24px}
+.narrow{max-width:760px}
+
+/* ---- nav ---- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(247,243,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid #ddd5c4}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:66px;gap:20px}
+.mark{font-weight:800;font-size:20px;color:var(--navy);text-decoration:none;letter-spacing:-.02em;white-space:nowrap}
+.mark em{font-style:normal;color:var(--red)}
+.nav-links{display:flex;gap:26px;list-style:none;align-items:center}
+.nav-links a{font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
+.nav-links a:hover,.nav-links a.on{border-bottom-color:var(--gold)}
+
+/* ---- buttons ---- */
+.btn{display:inline-block;padding:13px 22px;border-radius:14px;text-decoration:none;font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:inherit}
+.btn-gold{background:var(--gold);color:#111827}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:#27498a}
+.btn-outline{border:1px solid rgba(255,255,255,.45);color:#fff}
+.btn-outline:hover{background:rgba(255,255,255,.1)}
+.btn-sm{padding:10px 18px;font-size:14px}
+
+/* ---- shared bits ---- */
+.eyebrow{display:inline-block;background:#ffffff14;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.eyebrow.dark{background:transparent;padding:0;color:var(--navy)}
+.hero{background:var(--navy);color:#fff;padding:64px 0 58px}
+.hero h1{font-size:46px;line-height:1.08;font-weight:800;margin-top:20px}
+.hero h1 span{color:var(--gold)}
+.hero .deck{margin-top:20px;font-size:20px;line-height:1.65;color:#dbe4f0;max-width:60ch}
+.cta-row{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+
+.section{padding:72px 0}
+.band{background:var(--cream-w);border-top:1px solid #ddd5c4;border-bottom:1px solid #ddd5c4}
+h2{font-size:32px;font-weight:800;color:var(--navy);line-height:1.18}
+h3{font-size:20px;font-weight:700}
+.lead{font-size:18px;line-height:1.8;color:#243247;margin-top:16px}
+
+.pull{margin:34px 0;padding:26px 30px;background:var(--navy);color:#fff;border-radius:20px;border-left:6px solid var(--gold);font-size:22px;font-weight:600;line-height:1.45}
+.pull.red{border-left-color:var(--red)}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+.stat .n{font-size:36px;font-weight:800;color:var(--navy);line-height:1.05}
+.stat .n.red{color:var(--red)}
+.stat .l{font-size:14px;color:var(--slate);margin-top:8px;line-height:1.5}
+.src{display:inline-block;margin-top:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--line);font-weight:600}
+.src:hover{border-bottom-color:var(--navy)}
+
+/* ---- cards ---- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:32px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .14s,box-shadow .14s}
+a.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(31,59,109,.10)}
+.card .meta{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.card h3{margin-top:10px;color:var(--navy);line-height:1.28}
+.card p{margin-top:10px;font-size:15px;color:var(--slate);line-height:1.65;flex:1}
+.card .more{margin-top:16px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+
+/* ---- prose (articles) ---- */
+.prose{max-width:720px}
+.prose p{margin-top:20px;font-size:18px;line-height:1.85;color:#243247}
+.prose h2{margin-top:46px;font-size:28px}
+.prose h3{margin-top:34px;font-size:21px;color:var(--navy)}
+.prose ul,.prose ol{margin-top:18px;padding-left:24px}
+.prose li{font-size:18px;line-height:1.8;margin-bottom:10px;color:#243247}
+.prose blockquote{margin:32px 0;padding:20px 26px;background:#fff;border-left:5px solid var(--gold);border-radius:0 16px 16px 0;font-size:20px;font-weight:600;color:var(--navy)}
+.prose a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+.prose img{max-width:100%;border-radius:16px;margin-top:24px}
+.prose table{width:100%;border-collapse:collapse;margin:28px 0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.prose th{background:var(--navy);color:#fff;text-align:left;padding:12px 14px;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.prose td{padding:12px 14px;border-top:1px solid var(--line);font-size:16px}
+
+/* ---- reading list ---- */
+.links{margin-top:32px;display:grid;gap:12px}
+.link{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.link h3{font-size:17px;line-height:1.35}
+.link h3 a{color:var(--navy);text-decoration:none}
+.link h3 a:hover{text-decoration:underline}
+.link .why{font-size:15px;color:var(--slate);margin-top:6px;line-height:1.6}
+.link .from{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+.link .yr{font-size:13px;color:#94a3b8;font-weight:600;white-space:nowrap}
+
+.note{margin:30px 0;background:#fffbeb;border:1px solid #fde68a;border-radius:16px;padding:20px 22px;font-size:15px;line-height:1.75;color:#78350f}
+.note b{display:block;color:var(--ink);margin-bottom:4px}
+
+/* ---- footer ---- */
+.foot{background:var(--navy);color:#dbe4f0;padding:52px 0 28px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:36px}
+.foot-mark{font-size:26px;font-weight:800;color:#fff}
+.foot-tag{color:var(--gold);margin-top:6px;font-size:15px}
+.foot h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8fa3c0;margin-bottom:12px;font-weight:700}
+.foot ul{list-style:none}
+.foot li{margin-bottom:9px}
+.foot a{color:#c6d2e4;text-decoration:none;font-size:15px}
+.foot a:hover{color:#fff}
+.foot-bottom{margin-top:38px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);font-size:13px;color:#8fa3c0;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .stats,.cards,.foot-grid{grid-template-columns:1fr}
+  .link{grid-template-columns:1fr}
+  .hero h1{font-size:32px}
+  h2{font-size:26px}
+  .pull{font-size:19px;padding:22px}
+  .section{padding:52px 0}
+}
+
+
+/* ---- accessibility ----
+   Most of the people this site is for are older, and many are disabled.
+   This is not decoration. It is the audience. */
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--gold);color:#111827;font-weight:800;
+  padding:14px 22px;border-radius:0 0 12px 0;text-decoration:none;
+}
+.skip:focus{left:0}
+
+/* Bigger, easier tap targets — arthritic hands, phone screens, older eyes */
+@media(max-width:900px){
+  .btn{padding:16px 26px;font-size:16px}
+  .nav-links a{padding:10px 0}
+  input,select,textarea{font-size:16px;padding:15px 16px}  /* 16px stops iOS zooming on focus */
+  .link h3 a,.org h4 a{padding:4px 0;display:inline-block}
+}
+
+/* Respect people who get motion sickness */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+
+/* Respect people who need high contrast */
+@media(prefers-contrast:more){
+  body{color:#000}
+  .lead,.card p,.stat .l{color:#1a2332}
+  .card,.stat{border-color:#94a3b8}
+}
+
+/* Never hide the focus ring. Some people navigate entirely by keyboard. */
+*:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
