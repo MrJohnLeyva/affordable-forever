@@ -1,0 +1,13 @@
+{
+  "name": "affordable-forever",
+  "version": "1.0.0",
+  "description": "Affordability shouldn't come with an expiration date.",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "type": "module"
+}

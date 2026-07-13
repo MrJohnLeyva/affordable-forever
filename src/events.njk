@@ -1,0 +1,219 @@
+---
+layout: base.njk
+title: Events
+description: Screenings, rallies, trainings, art builds, and the rooms where this gets argued. Come to one — or send us yours.
+permalink: /events/
+---
+
+<style>
+  .ev{
+    background:#fff;border:1px solid var(--line);border-radius:20px;
+    padding:26px 28px;margin-top:16px;
+    display:grid;grid-template-columns:82px 1fr;gap:24px;
+  }
+  .ev.next{border-left:5px solid var(--gold)}
+  .when{text-align:center}
+  .when .mo{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+  .when .dy{font-size:30px;font-weight:800;color:var(--navy);line-height:1.05;margin-top:2px}
+  .when .yr{font-size:12px;color:var(--slate);font-weight:600;margin-top:2px}
+  .ev h3{font-size:21px;color:var(--navy);line-height:1.3;margin-top:8px}
+  .ev .where{font-size:14px;color:var(--slate);margin-top:6px;font-weight:600}
+  .ev .body{margin-top:12px}
+  .ev .body p{margin-top:10px;font-size:16px;line-height:1.75;color:#243247}
+  .ev .body strong{color:var(--ink)}
+  .ev .go{
+    display:inline-block;margin-top:14px;font-size:13px;font-weight:800;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--navy);
+    text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;
+  }
+  .tag{
+    display:inline-block;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    padding:4px 10px;border-radius:999px;
+    background:var(--cream);border:1px solid var(--line);color:var(--slate);
+  }
+  .empty{background:#fff;border:1px dashed var(--line);border-radius:20px;padding:38px;text-align:center}
+  .empty h3{color:var(--navy);font-size:20px}
+  .empty p{margin-top:10px;font-size:16px;color:var(--slate);line-height:1.7}
+
+  .submit{background:var(--navy);color:#fff;border-radius:24px;padding:34px 36px;margin-top:50px}
+  .submit h2{color:#fff;font-size:26px}
+  .submit > p{color:#a9bad3;margin-top:12px;font-size:17px;line-height:1.75}
+  .submit form{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .submit label{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8fa3c0;margin-bottom:7px}
+  .submit input,.submit select,.submit textarea{
+    width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;
+    background:#ffffff0f;color:#fff;font-family:inherit;font-size:15px;
+  }
+  .submit input:focus,.submit select:focus,.submit textarea:focus{outline:2px solid var(--gold)}
+  .submit option{background:var(--navy-d)}
+  .submit .wide{grid-column:1 / -1}
+  .submit .fine{grid-column:1 / -1;font-size:13px;color:#8fa3c0;line-height:1.65}
+  @media(max-width:700px){
+    .ev{grid-template-columns:1fr}
+    .when{text-align:left;display:flex;gap:8px;align-items:baseline}
+    .when .dy{font-size:22px}
+    .submit form{grid-template-columns:1fr}
+    .submit{padding:26px 22px}
+  }
+</style>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">Events</div>
+    <h1>Come to a room where this is being <span>argued</span>.</h1>
+    <p class="deck">
+      Screenings, rallies, trainings, art builds, hearings. Organizing happens in person.
+      It has never happened any other way.
+    </p>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container narrow">
+
+    <h2 style="margin-top:0">Coming up</h2>
+
+    {% if collections.upcomingEvents.length %}
+      {% for e in collections.upcomingEvents %}
+      <div class="ev next">
+        <div class="when">
+          <div class="mo">{{ e.data.date | mon }}</div>
+          <div class="dy">{{ e.data.date | day }}</div>
+          <div class="yr">{{ e.data.date | yr }}</div>
+        </div>
+        <div>
+          <span class="tag">{{ e.data.kind }}</span>
+          <h3>{{ e.data.title }}</h3>
+          <div class="where">{{ e.data.location }}{% if e.data.time %} · {{ e.data.time }}{% endif %}{% if e.data.host %} · {{ e.data.host }}{% endif %}</div>
+          <div class="body">{{ e.templateContent | safe }}</div>
+          {% if e.data.link %}<a class="go" href="{{ e.data.link }}" target="_blank" rel="noopener">Details &amp; RSVP →</a>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty" style="margin-top:20px">
+        <h3>Nothing listed right now.</h3>
+        <p>
+          More <em>Rabble Rousers</em> screenings are in the works with New Economy Project, and
+          there will be rallies as COPA and TOPA move. <a href="/#join">Add your name</a> and I'll
+          tell you when and where.
+        </p>
+      </div>
+    {% endif %}
+
+    <div class="submit" id="submit">
+      <h2>Organizing something? Send it to me.</h2>
+      <p>
+        A rally, a screening, a training, an art build, a tenants association meeting, a teach-in,
+        a hearing you want people at. If it's about expiring affordability, tenant power, or
+        community ownership anywhere in New York, it belongs on this page —
+        <strong style="color:#fff">whether or not I have anything to do with it</strong>.
+      </p>
+
+      <form name="event" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="event">
+        <p hidden><label>Skip: <input name="bot-field"></label></p>
+
+        <div class="wide">
+          <label for="ev-title">What is it?</label>
+          <input id="ev-title" name="title" type="text" required placeholder="Rally to pass COPA">
+        </div>
+
+        <div>
+          <label for="ev-kind">Kind</label>
+          <select id="ev-kind" name="kind">
+            <option>Rally</option>
+            <option>Screening</option>
+            <option>Training</option>
+            <option>Art build</option>
+            <option>Tenants association meeting</option>
+            <option>Teach-in</option>
+            <option>Hearing / testimony</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="ev-date">Date</label>
+          <input id="ev-date" name="date" type="date" required>
+        </div>
+
+        <div>
+          <label for="ev-time">Time</label>
+          <input id="ev-time" name="time" type="text" placeholder="6:00 pm">
+        </div>
+
+        <div>
+          <label for="ev-loc">Where</label>
+          <input id="ev-loc" name="location" type="text" required placeholder="City Hall steps">
+        </div>
+
+        <div class="wide">
+          <label for="ev-host">Who's hosting</label>
+          <input id="ev-host" name="host" type="text" placeholder="Your tenant union, coalition, or building">
+        </div>
+
+        <div class="wide">
+          <label for="ev-desc">What's happening — and why should someone come?</label>
+          <textarea id="ev-desc" name="description" rows="4" required></textarea>
+        </div>
+
+        <div class="wide">
+          <label for="ev-link">RSVP or info link</label>
+          <input id="ev-link" name="link" type="url" placeholder="https://">
+        </div>
+
+        <div>
+          <label for="ev-name">Your name</label>
+          <input id="ev-name" name="name" type="text" required>
+        </div>
+
+        <div>
+          <label for="ev-email">Your email</label>
+          <input id="ev-email" name="email" type="email" required>
+        </div>
+
+        <div class="wide">
+          <button type="submit" class="btn btn-gold" style="width:100%;padding:15px">Submit this event</button>
+        </div>
+
+        <p class="fine">
+          I read every one. Nothing posts automatically — I check it and put it up, usually within a
+          day. If I have a question I'll email you.
+        </p>
+      </form>
+    </div>
+
+    <h2 style="margin-top:56px">What we've done</h2>
+    <p class="lead">Not a highlight reel — a template. Steal any of it.</p>
+
+    {% for e in collections.pastEvents %}
+    <div class="ev">
+      <div class="when">
+        <div class="mo">{{ e.data.date | mon }}</div>
+        <div class="dy">{{ e.data.date | day }}</div>
+        <div class="yr">{{ e.data.date | yr }}</div>
+      </div>
+      <div>
+        <span class="tag">{{ e.data.kind }}</span>
+        <h3>{{ e.data.title }}</h3>
+        <div class="where">{{ e.data.location }}{% if e.data.host %} · {{ e.data.host }}{% endif %}</div>
+        <div class="body">{{ e.templateContent | safe }}</div>
+        {% if e.data.link %}<a class="go" href="{{ e.data.link }}" target="_blank" rel="noopener">See the documentation →</a>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="note" style="margin-top:44px">
+      <b>Why a screening, and not just a rally?</b>
+      A rally tells people something is wrong. A film about Cooper Square tells them something else
+      entirely: <em>that it has already been beaten.</em> Frances Goldin and her neighbours took on
+      Robert Moses and five mayors and came out the other side with permanently affordable housing
+      in the middle of the most expensive real estate market on earth.
+      <br><br>
+      People will fight much harder for something they've watched somebody else win.
+      That's what the screening is for.
+    </div>
+
+  </div>
+</main>

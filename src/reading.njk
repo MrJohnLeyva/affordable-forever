@@ -1,0 +1,38 @@
+---
+layout: base.njk
+title: Reading list
+description: The best writing on LIHTC, expiring affordability, and preservation. Curated, and growing.
+permalink: /reading/
+---
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">Reading list</div>
+    <h1>Everything worth reading on <span>LIHTC expiration</span>.</h1>
+    <p class="deck">
+      Nobody had made this list, so we made it. Reporting, research, and legislation —
+      with a note on why each one matters.
+    </p>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container narrow">
+    <div class="links">
+      {% for item in links | reverse %}
+      <div class="link">
+        <div>
+          <div class="from">{{ item.source }}</div>
+          <h3><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a></h3>
+          <p class="why">{{ item.why }}</p>
+        </div>
+        <div class="yr">{{ item.year }}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="note" style="margin-top:36px">
+      <b>Know something that belongs here?</b>
+      This list is maintained by hand and it is definitely incomplete. Send it over and we'll add it.
+    </div>
+  </div>
+</main>

@@ -1,0 +1,309 @@
+---
+layout: base.njk
+title: How old will you be when your home expires?
+description: LIHTC affordability lasts 30 years. The people who move in don't stop needing a home after 30 years. Do the arithmetic.
+---
+
+<style>
+
+  .eyebrow{display:inline-block;background:#ffffff14;padding:8px 14px;border-radius:999px;
+    font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  h1{font-size:46px;line-height:1.08;font-weight:800;margin:20px auto 0;max-width:17ch}
+  h1 span{color:var(--gold)}
+  header p{margin:20px auto 0;font-size:19px;color:#dbe4f0;max-width:56ch;line-height:1.7}
+
+  main{padding:0 0 80px}
+  .panel{
+    background:#fff;border:1px solid var(--line);border-radius:28px;
+    padding:36px;margin-top:-32px;box-shadow:0 20px 50px rgba(31,59,109,.10);
+  }
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  label{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--slate);margin-bottom:8px}
+  .hint{font-size:12px;color:#94a3b8;font-weight:500;text-transform:none;letter-spacing:0;margin-top:4px}
+  input,select{
+    width:100%;padding:15px 16px;border-radius:14px;border:1px solid var(--line);
+    background:var(--cream);font-family:inherit;font-size:17px;font-weight:600;color:var(--ink);
+  }
+  input:focus,select:focus{outline:3px solid var(--gold);border-color:transparent}
+
+  .go{
+    width:100%;margin-top:26px;background:var(--navy);color:#fff;border:none;border-radius:16px;
+    padding:18px;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;
+  }
+  .go:hover{background:#27498a}
+
+  /* the answer */
+  .answer{margin-top:30px;display:none}
+  .answer.show{display:block;animation:rise .5s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+  .verdict{
+    background:var(--navy);color:#fff;border-radius:24px;padding:44px 36px;text-align:center;
+    border-bottom:6px solid var(--gold);
+  }
+  .verdict .lead{font-size:16px;color:#b9c9e0;letter-spacing:.04em}
+  .big{font-size:96px;font-weight:800;line-height:1;color:var(--gold);margin:10px 0}
+  .verdict .tail{font-size:24px;font-weight:600;line-height:1.35;max-width:22ch;margin:0 auto}
+  .verdict.gone{border-bottom-color:var(--red)}
+  .verdict.gone .big{color:var(--red)}
+
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center}
+  .fact .n{font-size:28px;font-weight:800;color:var(--navy)}
+  .fact .l{font-size:12px;color:var(--slate);margin-top:6px;line-height:1.4}
+
+  .kicker{
+    margin-top:14px;background:#fffbeb;border:1px solid #fde68a;border-radius:18px;
+    padding:22px 24px;font-size:17px;line-height:1.7;color:#78350f;
+  }
+  .kicker b{color:#0f172a}
+
+  .share{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+  .share button{
+    background:var(--gold);color:#111827;border:none;border-radius:14px;padding:14px 20px;
+    font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;
+  }
+  .share button.alt{background:#fff;border:1px solid var(--line);color:var(--navy)}
+  .share button:hover{filter:brightness(.96)}
+
+  .why{margin-top:56px}
+  .why h2{font-size:28px;font-weight:800;color:var(--navy)}
+  .why p{margin-top:14px;font-size:17px;line-height:1.8;color:var(--slate)}
+  .why p b{color:var(--ink)}
+  .pull{
+    margin:26px 0;padding:24px 28px;background:#fff;border-left:5px solid var(--gold);
+    border-radius:0 18px 18px 0;font-size:20px;font-weight:600;color:var(--navy);line-height:1.5;
+  }
+  .src{margin-top:24px;font-size:13px;color:#94a3b8;line-height:1.7}
+
+  @media(max-width:820px){
+    .grid,.facts{grid-template-columns:1fr}
+    h1{font-size:32px}
+    .big{font-size:72px}
+    .panel{padding:24px}
+  }
+
+</style>
+
+
+<header>
+  <div class="container">
+    <div class="eyebrow">Affordable Forever</div>
+    <h1>How old will you be when your home <span>expires</span>?</h1>
+    <p>
+      LIHTC affordability in New York lasts thirty years. The people who move in
+      do not stop needing a home after thirty years. Do the arithmetic.
+    </p>
+  </div>
+</header>
+
+<main class="container">
+  <div class="panel">
+    <div class="grid">
+      <div>
+        <label for="moved">Year you moved in</label>
+        <input id="moved" type="number" placeholder="1994" min="1987" max="2026">
+      </div>
+      <div>
+        <label for="age">Your age then</label>
+        <input id="age" type="number" placeholder="23" min="0" max="100">
+      </div>
+      <div>
+        <label for="exp">Year it expires</label>
+        <input id="exp" type="number" placeholder="2025" min="1990" max="2070">
+        <div class="hint">Don't know? Leave blank — we'll assume 30 years.</div>
+      </div>
+    </div>
+    <button class="go" id="go">Show me</button>
+
+    <div class="answer" id="answer">
+      <div class="verdict" id="verdict">
+        <div class="lead" id="lead"></div>
+        <div class="big" id="big"></div>
+        <div class="tail" id="tail"></div>
+      </div>
+
+      <div class="facts" id="facts"></div>
+
+      <div class="kicker" id="kicker"></div>
+
+      <div id="qc" style="margin-top:14px;background:#fff;border:1px solid #fecaca;border-left:5px solid var(--red);border-radius:18px;padding:24px 26px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#991b1b">There may be an earlier date</div>
+        <h3 style="font-size:21px;color:#7f1d1d;margin-top:8px;line-height:1.3">And nobody told you about that one either.</h3>
+        <p style="margin-top:12px;font-size:16px;line-height:1.75;color:#450a0a">
+          Federal law lets an owner apply to leave the programme after just <strong>fifteen
+          years</strong> — the <em>qualified contract</em> loophole. The state gets one year to find
+          a buyer who will keep it affordable. If it can't, the affordability period
+          <strong>terminates early</strong>.
+        </p>
+        <p style="margin-top:12px;font-size:16px;line-height:1.75;color:#450a0a">
+          For your building, fifteen years would have been <strong id="qc-year">—</strong>,
+          and you would have been <strong id="qc-age">—</strong>.
+        </p>
+
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid #fecaca">
+          <p style="font-size:15px;line-height:1.7;color:#450a0a">
+            <strong>Does it apply to you? Probably not — but you have to check.</strong>
+            New York's allocation plans now <em>require</em> owners to sign away the qualified
+            contract right as a condition of receiving credits. But that requirement came in later,
+            and <strong>buildings financed before it may still hold that right.</strong> The state's
+            own guidance tells owners to go and read their regulatory agreement to find out.
+          </p>
+          <p style="font-size:15px;line-height:1.7;color:#450a0a;margin-top:10px">
+            So ask HCR, in writing: <em>did the owner of my building waive the qualified contract
+            right?</em> If your building opened in the 1990s, that is not a rhetorical question.
+          </p>
+        </div>
+
+        <div style="margin-top:16px;background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:16px 18px">
+          <p style="font-size:15px;line-height:1.7;color:#78350f">
+            <strong>And a protection almost nobody knows they have:</strong> if a qualified contract
+            does terminate the affordability period early, federal law still requires the owner —
+            for <strong>three more years</strong> — to honour the maximum tax-credit rent for
+            existing tenants, <em>and to notify you that it happened</em>.
+            <br><br>
+            If your rent jumped and you were never told about a qualified contract, that is a
+            question for a lawyer. Tenants in Missouri are suing over exactly this.
+          </p>
+        </div>
+      </div>
+
+      <div class="share">
+        <button id="copy">Copy this to share</button>
+        <button class="alt" id="again">Try another</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="why">
+    <h2>Why this number is the whole argument</h2>
+    <p>
+      When Congress set the compliance period at thirty years, it was describing a
+      <b>financing term</b>. It was not describing a life. Nobody asked the obvious question:
+      what happens to the people still living there on the last day?
+    </p>
+    <p>
+      A tenant who moves in at 25 will be 55 when it ends — working, mobile, with options.
+      A tenant who moves in at 55 will be <b>85</b>. She will be older, poorer, more likely to be
+      disabled, and priced out of the city she spent thirty years in. Same program. Same term.
+      Completely different sentence.
+    </p>
+    <div class="pull">
+      The thirty-year term is a bet that tenants won't be there at the end.
+      Most of them are.
+    </div>
+    <p>
+      This is why the language matters. The industry calls it a <b>sunset</b>. For the person
+      still living in the apartment, it is <b>doomsday</b> — and the difference between those
+      two words is the difference between a schedule and a home.
+    </p>
+    <p>
+      States have already fixed this. <b>Vermont</b> requires affordability in perpetuity, and has
+      since the early 2000s — and gets two to three times more developer demand than it has credits
+      to award. <b>Oregon</b> requires 60 years. <b>California</b>, 55. <b>Massachusetts, Montana
+      and Utah</b>, 50. The state average is roughly 42.
+    </p>
+    <div class="pull">
+      New York requires 30. We are below the national average — in the most expensive
+      housing market in the country.
+    </div>
+    <p style="margin-top:20px;font-size:17px">
+      <a href="/what-lihtc-is/" style="color:var(--navy);font-weight:700">The full argument, and the state-by-state numbers →</a>
+    </p>
+    <p class="src">
+      Sources: National Low Income Housing Coalition; National Housing Trust analysis of state
+      Qualified Allocation Plans; Shelterforce. Expiration dates are projections based on a
+      30-year term from the year placed in service, not filed dates — see our methodology note.
+    </p>
+  </section>
+</main>
+
+
+
+<script>
+const $ = id => document.getElementById(id);
+const NOW = new Date().getFullYear();
+let shareText = "";
+
+function run(){
+  const moved = parseInt($('moved').value);
+  const ageAt = parseInt($('age').value);
+  let   exp   = parseInt($('exp').value);
+
+  if(!moved || isNaN(ageAt)){ alert("Enter the year you moved in and how old you were."); return; }
+  if(!exp){ exp = moved + 30; $('exp').value = exp; }
+
+  const ageAtExp = ageAt + (exp - moved);
+  const yearsIn  = exp - moved;
+  const past     = exp <= NOW;
+  const ageNow   = ageAt + (NOW - moved);
+
+  $('verdict').className = 'verdict' + (past ? ' gone' : '');
+  $('lead').textContent = past
+    ? "Your building's affordability has already expired. When it did, you were"
+    : "When your building's affordability expires, you will be";
+  $('big').textContent  = ageAtExp;
+  $('tail').textContent = past
+    ? `years old — after ${yearsIn} years in that home.`
+    : `years old — after ${yearsIn} years in that home.`;
+
+  $('facts').innerHTML = `
+    <div class="fact"><div class="n">${moved}</div><div class="l">the year you came home</div></div>
+    <div class="fact"><div class="n">${yearsIn}</div><div class="l">years of your life in that building</div></div>
+    <div class="fact"><div class="n">${exp}</div><div class="l">the year the protection ${past?'ended':'ends'}</div></div>`;
+
+  let k;
+  if(ageAtExp >= 75){
+    k = `<b>You would be ${ageAtExp}.</b> This is exactly the failure at the heart of the program.
+         The people most likely to be living in a building on the day its affordability ends are the
+         people least able to absorb it — older, on fixed incomes, more likely to be disabled, and
+         priced out of the only city they know. Thirty years was never a policy. It was a financing term.`;
+  } else if(ageAtExp >= 60){
+    k = `<b>You would be ${ageAtExp}</b> — at or near retirement, on a fixed income, in a market
+         where the rent can now go anywhere. A thirty-year clock that starts in middle age ends at
+         precisely the worst possible moment.`;
+  } else if(ageAtExp >= 45){
+    k = `<b>You would be ${ageAtExp}.</b> You'd have spent ${yearsIn} years building a life on that
+         block — schools, work, neighbors, a doctor, a route home. None of that is portable, and none
+         of it was counted when the term was set.`;
+  } else {
+    k = `<b>You would be ${ageAtExp}</b> — young enough to start over somewhere else, which is more
+         than most of your neighbors can say. Look around your building at the people who moved in the
+         same year you did, but twenty years older. Run their number instead.`;
+  }
+  if(!past && exp > NOW){
+    k += `<br><br>That is <b>${exp - NOW} year${exp-NOW===1?'':'s'} from now</b>. You are ${ageNow} today.`;
+  }
+  $('kicker').innerHTML = k;
+
+  const qcYear = moved + 15;
+  const qcAge  = ageAt + 15;
+  $('qc-year').textContent = qcYear;
+  $('qc-age').textContent  = qcAge + (qcAge === 1 ? ' year old' : ' years old');
+
+  shareText = past
+    ? `When my building's affordable housing protections expired in ${exp}, I was ${ageAtExp} years old. I had lived there ${yearsIn} years. LIHTC affordability lasts 30 years — but people don't stop needing a home after 30 years. When they call it a "sunset," for tenants it's doomsday. affordableforever.org`
+    : `When my building's affordable housing protections expire in ${exp}, I will be ${ageAtExp} years old. I will have lived there ${yearsIn} years. LIHTC affordability lasts 30 years — but people don't stop needing a home after 30 years. When they call it a "sunset," for tenants it's doomsday. affordableforever.org`;
+
+  $('answer').classList.add('show');
+  $('answer').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+$('go').addEventListener('click', run);
+['moved','age','exp'].forEach(id =>
+  $(id).addEventListener('keydown', e => { if(e.key==='Enter') run(); }));
+
+$('copy').addEventListener('click', () => {
+  navigator.clipboard.writeText(shareText).then(()=>{
+    const b = $('copy'); const t = b.textContent;
+    b.textContent = "Copied — go paste it"; setTimeout(()=>b.textContent=t, 2200);
+  });
+});
+$('again').addEventListener('click', () => {
+  $('answer').classList.remove('show');
+  ['moved','age','exp'].forEach(id => $(id).value='');
+  $('moved').focus();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
