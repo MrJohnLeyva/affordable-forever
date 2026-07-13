@@ -1,196 +1,386 @@
 ---
 layout: base.njk
-title: Affordability shouldn't come with an expiration date
-description: Affordable housing is not disappearing. It is expiring by design. A tenant-led campaign for permanent affordability.
+title: The LIHTC expiration crisis
+description: We are losing affordable housing faster than we build it — not by accident, but by design. Public money creates housing that expires after 30 years. Then the market takes it.
 ---
 
+<style>
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;counter-reset:h}
+  .how > div{
+    background:#fff;border:1px solid var(--line);padding:30px 28px;position:relative;
+  }
+  .how > div:first-child{border-radius:20px 0 0 20px}
+  .how > div:last-child{border-radius:0 20px 20px 0;border-left:none;background:#fef2f2;border-color:#fecaca}
+  .how > div:nth-child(2){border-left:none;border-right:none}
+  .how .n{
+    counter-increment:h;
+    width:34px;height:34px;border-radius:10px;background:var(--navy);color:var(--gold);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
+  }
+  .how > div:last-child .n{background:var(--red);color:#fff}
+  .how h3{font-size:20px;color:var(--navy);margin-top:14px;line-height:1.3}
+  .how > div:last-child h3{color:#991b1b}
+  .how p{margin-top:10px;font-size:16px;line-height:1.7;color:var(--slate)}
+  .how > div:last-child p{color:#450a0a}
+
+  .case{
+    background:#fff;border:1px solid var(--line);border-left:6px solid var(--gold);
+    border-radius:20px;padding:34px 36px;margin-top:32px;
+  }
+  .case .lab{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+  .case h3{font-size:26px;color:var(--navy);margin-top:8px}
+  .case p{margin-top:14px;font-size:17px;line-height:1.8;color:#243247}
+  .rentline{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px;
+  }
+  .rentline div{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}
+  .rentline .v{font-size:26px;font-weight:800;color:var(--navy);line-height:1.1}
+  .rentline .v.red{color:var(--red)}
+  .rentline .k{font-size:12px;color:var(--slate);margin-top:6px;line-height:1.4;font-weight:600}
+
+  .failure{background:var(--navy-d);color:#fff;padding:64px 0}
+  .failure .lab{
+    display:inline-block;background:var(--red);color:#fff;
+    font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+    padding:8px 16px;border-radius:6px;
+  }
+  .failure h2{color:#fff;font-size:clamp(28px,3.6vw,40px);margin-top:20px;line-height:1.2}
+  .failure .sub{color:#a9bad3;margin-top:20px;font-size:19px;line-height:1.75}
+  .failure .verdict{
+    margin-top:34px;padding:26px 30px;background:#ffffff0d;border-left:5px solid var(--gold);
+    border-radius:0 16px 16px 0;font-size:23px;font-weight:700;line-height:1.45;color:#fff;
+  }
+
+  .chartbox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px 26px 20px;margin-top:30px}
+  .chartbox h3{font-size:18px;color:var(--navy)}
+  .chartbox .cap{font-size:13px;color:var(--slate);margin-top:4px;margin-bottom:18px}
+  .chartbox .src{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:#94a3b8}
+
+  @media(max-width:900px){
+    .how{grid-template-columns:1fr}
+    .how > div{border-radius:0 !important;border-left:1px solid var(--line) !important;border-right:1px solid var(--line) !important;border-bottom:none}
+    .how > div:first-child{border-radius:20px 20px 0 0 !important}
+    .how > div:last-child{border-radius:0 0 20px 20px !important;border-bottom:1px solid #fecaca}
+    .rentline{grid-template-columns:1fr}
+  }
+</style>
+
+<!-- ============ HERO ============ -->
 <header class="hero">
   <div class="container">
     <div class="eyebrow">The LIHTC Expiration Crisis</div>
-    <h1>Affordable housing is not disappearing.<br>It is <span>expiring by design</span>.</h1>
+    <h1>We are losing affordable housing <span>faster than we build it</span>.</h1>
     <p class="deck">
-      I live at 63 Tiffany Place in Brooklyn. For nearly thirty years our 70-unit building was
-      home to seniors, essential workers, and families who built this neighborhood. Then the
-      Low-Income Housing Tax Credit ran out, and everything changed.
+      Not by accident. Public money pays to create affordable homes — and then, thirty years later,
+      the affordability simply expires and the market takes them back.
+      It is happening now, it is accelerating, and almost nobody knows.
     </p>
     <div class="cta-row">
       <a href="/find-your-building/" class="btn btn-gold">Find your building</a>
-      <a href="/what-lihtc-is/" class="btn btn-outline">What LIHTC actually is</a>
+      <a href="#how" class="btn btn-outline">How is this legal?</a>
     </div>
   </div>
 </header>
 
-<!-- ============ THE NUMBERS ============ -->
+<!-- ============ HOW IT WORKS — the missing piece ============ -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="eyebrow dark">How it works</div>
+    <h2 style="margin-top:14px;max-width:22ch">"You've lived there thirty years. How can anyone make you leave?"</h2>
+    <p class="lead" style="max-width:62ch">
+      This is the question everyone asks, and the answer is the reason this website exists.
+      Most people assume affordable housing is <em>permanently</em> affordable. It isn't.
+      It is a contract, and the contract has an end date.
+    </p>
+
+    <div class="how">
+      <div>
+        <div class="n">1</div>
+        <h3>The public pays to build it.</h3>
+        <p>A developer gets federal tax credits — public money — to build or convert a building into affordable housing. Investors buy the credits. That's what pays for the building.</p>
+      </div>
+      <div>
+        <div class="n">2</div>
+        <h3>In exchange, rents stay low — for thirty years.</h3>
+        <p>Low-income tenants move in at restricted rents. They stay. They raise children, bury parents, get old. The neighbourhood changes around them. For thirty years, the system works exactly as designed.</p>
+      </div>
+      <div>
+        <div class="n">3</div>
+        <h3>Then the thirty years end.</h3>
+        <p>And that's it. The rent restrictions lift. The owner can charge whatever the market will bear. There is no notice requirement, no agency with a duty to act, and <strong>no remedy written into the law</strong> for the people still living there.</p>
+      </div>
+    </div>
+
+    <div class="pull red" style="margin-top:36px">
+      Nobody is breaking the law. That is the entire problem.
+      <span style="display:block;font-size:17px;font-weight:400;margin-top:12px;opacity:.92">
+        The expiration is not a loophole, an oversight, or a bad landlord.
+        It is what the statute says. It was designed this way, and nobody wrote down what happens next.
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SCALE ============ -->
 <section class="section band">
   <div class="container">
     <div class="eyebrow dark">The scale of it</div>
-    <div class="stats">
+    <h2 style="margin-top:14px">Affordable housing is set to expire faster than we can replace it.</h2>
+
+    <div class="chartbox">
+      <h3>Cumulative LIHTC homes losing all affordability protections</h3>
+      <div class="cap">Every year the losses don't just continue — they accelerate.</div>
+      <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" style="display:block;width:100%">
+    <title>Cumulative LIHTC units losing all affordability restrictions, 2020 to 2029</title>
+    <desc>A steepening curve. In 2020, 15,131 units had lost all affordability restrictions. By 2029 the cumulative figure reaches 486,799. The rate of loss accelerates every year.</desc>
+    <defs>
+      <linearGradient id="afFill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#c0442f" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="#c0442f" stop-opacity="0.03"/>
+      </linearGradient>
+    </defs>
+    <line x1="62" y1="288.0" x2="740" y2="288.0" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="52" y="292.0" text-anchor="end" font-size="11" font-weight="600" fill="#94a3b8">0</text>
+    <line x1="62" y1="236.0" x2="740" y2="236.0" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="52" y="240.0" text-anchor="end" font-size="11" font-weight="600" fill="#94a3b8">100k</text>
+    <line x1="62" y1="184.0" x2="740" y2="184.0" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="52" y="188.0" text-anchor="end" font-size="11" font-weight="600" fill="#94a3b8">200k</text>
+    <line x1="62" y1="132.0" x2="740" y2="132.0" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="52" y="136.0" text-anchor="end" font-size="11" font-weight="600" fill="#94a3b8">300k</text>
+    <line x1="62" y1="80.0" x2="740" y2="80.0" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="52" y="84.0" text-anchor="end" font-size="11" font-weight="600" fill="#94a3b8">400k</text>
+    <line x1="62" y1="28.0" x2="740" y2="28.0" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="52" y="32.0" text-anchor="end" font-size="11" font-weight="600" fill="#94a3b8">500k</text>
+    
+    <path d="M 62,288 L 62.0,280.1 L 137.3,268.2 L 212.7,256.2 L 288.0,241.2 L 363.3,219.7 L 438.7,188.2 L 514.0,153.9 L 589.3,121.7 L 664.7,84.6 L 740.0,34.9 L 740.0,288 Z" fill="url(#afFill)"/>
+    <polyline points="62.0,280.1 137.3,268.2 212.7,256.2 288.0,241.2 363.3,219.7 438.7,188.2 514.0,153.9 589.3,121.7 664.7,84.6 740.0,34.9" fill="none" stroke="#c0442f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="62.0" cy="280.1" r="3.5" fill="#1f3b6d" stroke="#fff" stroke-width="2"/>
+    <circle cx="137.3" cy="268.2" r="3.5" fill="#1f3b6d" stroke="#fff" stroke-width="2"/>
+    <circle cx="212.7" cy="256.2" r="3.5" fill="#1f3b6d" stroke="#fff" stroke-width="2"/>
+    <circle cx="288.0" cy="241.2" r="3.5" fill="#1f3b6d" stroke="#fff" stroke-width="2"/>
+    <circle cx="363.3" cy="219.7" r="3.5" fill="#1f3b6d" stroke="#fff" stroke-width="2"/>
+    <circle cx="438.7" cy="188.2" r="3.5" fill="#1f3b6d" stroke="#fff" stroke-width="2"/>
+    <circle cx="514.0" cy="153.9" r="3.5" fill="#1f3b6d" stroke="#fff" stroke-width="2"/>
+    <circle cx="589.3" cy="121.7" r="3.5" fill="#1f3b6d" stroke="#fff" stroke-width="2"/>
+    <circle cx="664.7" cy="84.6" r="3.5" fill="#1f3b6d" stroke="#fff" stroke-width="2"/>
+    <circle cx="740.0" cy="34.9" r="5" fill="#c0442f" stroke="#fff" stroke-width="2"/>
+    
+    <text x="62.0" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2020</text>
+    <text x="137.3" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2021</text>
+    <text x="212.7" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2022</text>
+    <text x="288.0" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2023</text>
+    <text x="363.3" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2024</text>
+    <text x="438.7" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2025</text>
+    <text x="514.0" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2026</text>
+    <text x="589.3" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2027</text>
+    <text x="664.7" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2028</text>
+    <text x="740.0" y="308" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">2029</text>
+    
+    <text x="740.0" y="18.9" text-anchor="end" font-size="17" font-weight="800" fill="#c0442f">486,799</text>
+    <text x="68.0" y="268.1" font-size="12" font-weight="700" fill="#64748b">15,131</text>
+  </svg>
+      <div class="src">Source: National Low Income Housing Coalition, <em>Balancing Priorities: Preservation and Neighborhood Opportunity in the Low-Income Housing Tax Credit Program Beyond Year 30</em>.</div>
+    </div>
+
+    <div class="stats" style="margin-top:26px">
       <div class="stat">
         <div class="n red">845,000</div>
-        <div class="l">LIHTC homes scheduled to lose affordability protections between 2024 and 2035 — one third of everything currently restricted.</div>
+        <div class="l">LIHTC homes scheduled to lose their protections between 2024 and 2035 — a third of everything currently restricted.</div>
         <a class="src" href="https://fedcommunities.org/lihtc-affordability-requirement-expirations-implications-supply-guaranteed-affordable-housing/">Federal Reserve Bank of Chicago</a>
       </div>
       <div class="stat">
         <div class="n">75k–100k</div>
-        <div class="l">new LIHTC homes produced each year. Even at peak production, we are losing affordable housing as fast as we build it.</div>
+        <div class="l">new LIHTC homes built each year. Even at peak production, we are losing them as fast as we build them.</div>
         <a class="src" href="https://nlihc.org/">National Low Income Housing Coalition</a>
       </div>
       <div class="stat">
         <div class="n">0.39%</div>
-        <div class="l">vacancy rate for New York apartments under $1,100 a month. Above $2,400, it's 3.39%. The apartments aren't missing — the cheap ones are.</div>
+        <div class="l">vacancy rate for New York apartments under $1,100 a month. Above $2,400 it's 3.39%. The apartments aren't missing — <strong>the cheap ones are</strong>.</div>
         <a class="src" href="https://www.nyc.gov/site/hpd/news/007-24/new-york-city-s-vacancy-rate-reaches-historic-low-1-4-percent-demanding-urgent-action-new">NYC Housing &amp; Vacancy Survey 2023</a>
       </div>
     </div>
 
-    <div class="pull red" style="margin-top:44px">
-      This is not a failure of effort. It is a failure of policy —
-      and the failure was written into the statute forty years ago.
-    </div>
-
-    <div style="margin-top:36px;background:#fff;border:1px solid var(--line);border-left:6px solid var(--gold);border-radius:20px;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap">
-      <div style="flex:1;min-width:260px">
-        <h3 style="color:var(--navy);font-size:23px;line-height:1.3">Is your building expiring right now?</h3>
-        <p style="margin-top:8px;font-size:16px;color:var(--slate);line-height:1.7;max-width:52ch">
-          Don't panic — an expiring tax credit is not an eviction notice. But there are things to
-          do, and an order to do them in. Here's the playbook, written by someone who has done
-          every one of them.
-        </p>
-      </div>
-      <a href="/what-to-do/" class="btn btn-navy">What to do →</a>
-    </div>
+    <p class="lead" style="margin-top:30px;max-width:64ch">
+      And building more won't fix it on its own. New construction arrives at $3,500 a month.
+      You cannot fill a hole at $1,100 with apartments at $3,500 — and every year, the ones we
+      already have quietly disappear.
+      <a href="/what-lihtc-is/" style="color:var(--navy);font-weight:700">The full argument →</a>
+    </p>
   </div>
 </section>
 
-<!-- ============ THE ARGUMENT ============ -->
-<section class="section">
+<!-- ============ IT WAS AVOIDABLE ============ -->
+<section class="failure">
   <div class="container narrow">
-    <div class="eyebrow dark">The problem</div>
-    <h2 style="margin-top:14px">They call it a sunset. For a tenant, it's doomsday.</h2>
-    <p class="lead">
-      Every clock in the LIHTC program is the <em>investor's</em> clock. Ten years of tax credits.
-      Fifteen years of enforceable compliance. Fifteen more where the IRS can no longer claw
-      anything back. Thirty years, and the financing has finished doing what financing does.
+    <span class="lab">System failure</span>
+    <h2>Public dollars are used to create housing that expires after thirty years.</h2>
+    <p class="sub">
+      Every clock in this programme is the investor's clock. Ten years of tax credits. Fifteen years
+      of enforceable compliance. Thirty years, and the financing has finished doing what financing does.
     </p>
-    <p class="lead">
+    <p class="sub">
       Not one of those numbers is about a person. Nobody asked how long a tenant lives somewhere.
       Nobody asked what happens to the 62-year-old on the last day of year thirty.
     </p>
-    <p class="lead">
-      So when the term ran out on my building, there was no provision to consult, no agency with a
-      duty to act, no process for the seventy families inside. There was just a date — and after
-      it, the market. <strong>There is no remedy. Not an inadequate one. None.</strong>
-    </p>
 
-    <div class="pull">
-      A housing program would have asked what happens to the tenants.
-      A tax credit asks what happens to the investor's basis.
+    <div class="verdict">
+      We are not losing affordable housing by accident.<br>Current policy ensures it.
     </div>
 
-    <p class="lead">
-      And here is what nobody believes until it happens to them: <strong>we couldn't even find out
-      when it would end.</strong> The attorneys on both sides disagreed. The landlord's counsel
-      wasn't sure. The date on which seventy families could lose their homes was not a matter of
-      record — it was settled by negotiation.
+    <h2 style="margin-top:56px;font-size:clamp(26px,3.2vw,34px)">And every part of this was foreseeable.</h2>
+    <p class="sub">
+      You did not need a crystal ball. The term was written as thirty years. The people moving in
+      were in their thirties, forties and fifties. It required no special insight to work out that
+      most of them would still be alive, still need somewhere to live, and be older and poorer when
+      the clock ran out.
     </p>
-    <p class="lead">
-      <a href="/what-lihtc-is/" style="color:var(--navy);font-weight:700">Read the full explainer →</a>
+    <p class="sub">
+      <strong style="color:#fff">We also knew how to do it properly, and other states did.</strong>
+      Vermont has required affordability <em>in perpetuity</em> since the early 2000s — and gets two
+      to three times more developer demand than it has credits to award. Oregon requires sixty years.
+      California fifty-five. The average state term is about forty-two.
     </p>
-
-    <div class="pull red" style="margin-top:40px">
-      I have paid my landlord roughly two and a half times what he paid for my apartment.
-      <span style="display:block;font-size:16px;font-weight:400;margin-top:12px;opacity:.92">
-        The public subsidized this building. We paid the mortgage. We made the neighbourhood worth
-        something. And all three are now the reason we're told we can't afford to stay.
+    <div class="verdict" style="border-left-color:var(--red)">
+      New York requires the federal minimum — thirty years.<br>
+      <span style="font-size:17px;font-weight:400;display:block;margin-top:10px;color:#a9bad3">
+        Below the national average, in the most expensive housing market in the country.
+        Nobody in Washington made us do that.
       </span>
     </div>
-    <p class="lead">
-      <a href="/who-paid/" style="color:var(--navy);font-weight:700">Who actually paid for this building? →</a>
+    <p class="sub" style="margin-top:26px">
+      This was not a failure of knowledge. It was a failure of will — and it can be reversed by the
+      same people who chose it.
     </p>
   </div>
 </section>
 
-<!-- ============ THE FIX ============ -->
-<section class="section band">
+<!-- ============ THE CASE STUDY ============ -->
+<section class="section">
   <div class="container narrow">
-    <div class="eyebrow dark">The fix already exists</div>
-    <h2 style="margin-top:14px">Vermont solved this twenty years ago.</h2>
+    <div class="eyebrow dark">One example, of thousands</div>
+    <h2 style="margin-top:14px">What it looks like when the clock runs out</h2>
     <p class="lead">
-      The federal minimum is thirty years — but every state writes its own rulebook, and can demand
-      more. Vermont requires affordability <strong>in perpetuity</strong>, and has since the early
-      2000s. The thing the industry always warns will happen, didn't: Vermont gets
-      <strong>two to three times more developer demand than it has credits to award</strong>,
-      with a waiting list.
+      This site is run by a tenant of an expiring building. Not because it's special —
+      because it's <em>ordinary</em>. This is what the policy does when it arrives at a front door.
+    </p>
+
+    <div class="case">
+      <div class="lab">The story of 63 Tiffany Place</div>
+      <h3>In 1994, nobody wanted to live here.</h3>
+      <p>
+        The building was a failed luxury condo conversion that went to foreclosure. It only became
+        affordable housing because there was no other way to make the numbers work. Seventy families
+        moved in. <strong>The New York Times wrote about it as a model of how well these tax credit
+        programmes worked.</strong>
+      </p>
+      <p>
+        For thirty years, it did work. Tenants raised children, buried parents, and turned a
+        neighbourhood people avoided into one of the most desirable in Brooklyn. Rents rose gently —
+        <em>below inflation</em> — exactly as designed.
+      </p>
+
+      <div class="rentline">
+        <div><div class="v">$604</div><div class="k">rent in 1994</div></div>
+        <div><div class="v">$1,200</div><div class="k">rent thirty years later</div></div>
+        <div><div class="v red">$3,214–$6,300</div><div class="k">market rate on that block today</div></div>
+      </div>
+
+      <p style="margin-top:24px">
+        Then the thirty years ran out — and the same programme that housed those families became the
+        reason they could lose their homes. <strong>Nobody did anything wrong. The rent was paid, on
+        time, for three decades, through the pandemic.</strong> There was simply a date, and after
+        it, the market.
+      </p>
+      <p>
+        Residents who moved in in their forties, fifties and sixties are now in their seventies,
+        eighties and nineties. One of the founders of the tenants association travelled to Albany to
+        lobby, and died before finding out how it ends.
+      </p>
+      <p style="margin-top:20px;font-size:15px;color:var(--slate)">
+        <a href="https://save63tiffany.com" target="_blank" rel="noopener" style="color:var(--navy);font-weight:700">The full story of that building →</a>
+      </p>
+    </div>
+
+    <div class="pull" style="margin-top:34px">
+      That building is not the story. It is one example of the story —
+      and there are hundreds more in this state where the same clock is running,
+      and almost none of them know about each other.
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT MUST CHANGE ============ -->
+<section class="section band">
+  <div class="container">
+    <div class="eyebrow dark">What must change</div>
+    <h2 style="margin-top:14px">Four demands.</h2>
+
+    <div class="cards">
+      <div class="card">
+        <div class="meta">Demand 01</div>
+        <h3>Extend affordability beyond thirty years — or make it permanent</h3>
+        <p><strong>Vermont requires affordability in perpetuity</strong> and still gets two to three times more developer demand than it has credits to award. Oregon requires 60 years. California 55. The state average is 42. <strong>New York requires the federal minimum of 30.</strong></p>
+      </div>
+      <div class="card">
+        <div class="meta">Demand 02</div>
+        <h3>Give tenants and nonprofits the first chance to buy</h3>
+        <p>Pass <strong>TOPA</strong> at the state level and <strong>COPA</strong> in the city. And fund them — a right to buy is worthless without the money to buy. The city's acquisition fund is capitalised at $13 million.</p>
+      </div>
+      <div class="card">
+        <div class="meta">Demand 03</div>
+        <h3>Treat expiring LIHTC as a housing emergency</h3>
+        <p>Not a future risk. It is happening on a published schedule, right now, and every year of delay is thousands of homes we don't get back.</p>
+      </div>
+    </div>
+
+    <div class="cards" style="grid-template-columns:1fr;margin-top:22px">
+      <div class="card">
+        <div class="meta">Demand 04</div>
+        <h3>A right to know your expiration date</h3>
+        <p>Tenants are never told. Landlords sometimes don't know. In my building, the attorneys on both sides disagreed on the date and it was settled by <em>negotiation</em>. New York is about to give 421-a tenants this right in writing — and leave LIHTC tenants out of it. <a href="/articles/2026-07-13-nobody-knew-the-date/" style="color:var(--navy);font-weight:700">Read what happened →</a></p>
+      </div>
+    </div>
+
+    <div class="pull red" style="margin-top:36px">
+      New York's thirty-year term is not federal law. It is written into the state's own rulebook —
+      the Qualified Allocation Plan — by a state agency.
+      <span style="display:block;font-size:17px;font-weight:400;margin-top:12px;opacity:.92">
+        Changing it does not need Congress. It does not need a bill.
+        It needs New York to write a different number in a document it already controls.
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ URGENCY ============ -->
+<section class="section" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="container narrow">
+    <div class="eyebrow dark" style="color:var(--red)">Why now</div>
+    <h2 style="margin-top:14px">Every year we wait, the homes are gone for good.</h2>
+    <p class="lead">
+      This is not a crisis that waits politely for the movement to be ready. The expirations are on a
+      schedule that was set thirty years ago, and they arrive whether or not anyone has the votes yet.
+    </p>
+    <p class="lead">
+      And once a building goes, <strong>it does not come back.</strong> There is no mechanism to
+      reclaim it. You would have to buy it at market price, from an owner who now has every reason not
+      to sell — in a market the tenants themselves made expensive by staying.
+    </p>
+    <p class="lead">
+      The people in these buildings are the least able to absorb the loss: <strong>over half of LIHTC
+      tenants earn below 30% of area median income.</strong> Many are old. Many are disabled. Many
+      have nowhere in this city to go, and no city to go to.
     </p>
 
     <div class="pull red">
-      New York requires the federal minimum — thirty years.
-      The national average is forty-two. Vermont's is permanent.
-    </div>
-
-    <p class="lead">
-      We are below average, in the most expensive housing market in the country. That is a choice.
-      It was made here, it can be unmade here, and it does not require a single dollar from
-      Washington. <a href="/what-lihtc-is/" style="color:var(--navy);font-weight:700">See the full state-by-state comparison →</a>
-    </p>
-  </div>
-</section>
-
-<!-- ============ WHAT WE'RE ASKING ============ -->
-<section class="section">
-  <div class="container">
-    <div class="eyebrow dark">What we're asking for</div>
-    <h2 style="margin-top:14px">Four demands.</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="meta">Demand</div>
-        <h3>Make affordability permanent</h3>
-        <p>Housing built with public subsidy should stay affordable — not for a compliance period that quietly runs out. Vermont has run the experiment. The objection failed.</p>
-      </div>
-      <div class="card">
-        <div class="meta">Demand</div>
-        <h3>A right to know your expiration date</h3>
-        <p>Tenants are never told. Landlords sometimes don't know. New York is about to give 421-a tenants this right in writing — and leave LIHTC tenants out. Fix that.</p>
-      </div>
-      <div class="card">
-        <div class="meta">Demand</div>
-        <h3>Fund preservation at scale</h3>
-        <p>Preserving a home costs less than replacing it, and the building is already standing. Buy the buildings before the clock runs out, not after.</p>
-      </div>
-    </div>
-    <div class="cards" style="grid-template-columns:1fr;margin-top:22px">
-      <div class="card">
-        <div class="meta">Demand</div>
-        <h3>Pass TOPA and COPA — but understand what they are</h3>
-        <p>Tenants and nonprofits should get the first chance to buy. But these are <strong>triage, not a cure.</strong> They catch a building on its way out the door. They do not remove the door. Only permanent affordability does that.</p>
-      </div>
+      This was avoidable. It is still fixable.
+      <span style="display:block;font-size:17px;font-weight:400;margin-top:12px;opacity:.92">
+        But not for much longer, and not for the buildings whose clock ran out while we were
+        deciding whether it mattered.
+      </span>
     </div>
   </div>
 </section>
-
-<!-- ============ LATEST ============ -->
-{% if collections.articles.length >= 3 %}
-<section class="section band">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px">
-      <div>
-        <div class="eyebrow dark">Latest</div>
-        <h2 style="margin-top:12px">Analysis &amp; dispatches</h2>
-      </div>
-      <a href="/articles/" style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px">All articles →</a>
-    </div>
-    <div class="cards">
-      {% for post in collections.articles | limit(3) %}
-      <a class="card" href="{{ post.url }}">
-        <div class="meta">{{ post.data.tag or "Article" }} · {{ post.data.date | readableDate }}</div>
-        <h3>{{ post.data.title }}</h3>
-        <p>{{ post.data.description }}</p>
-        <div class="more">Read →</div>
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-{% endif %}
 
 <!-- ============ JOIN ============ -->
 <section class="section" id="join" style="background:var(--navy-d);color:#fff">
@@ -199,11 +389,11 @@ description: Affordable housing is not disappearing. It is expiring by design. A
       <div class="eyebrow">Join</div>
       <h2 style="color:#fff;margin-top:14px">Is your building on the clock?</h2>
       <p style="color:#a9bad3;margin-top:16px;font-size:18px;line-height:1.75">
-        There are hundreds of buildings in this state in exactly this position, and almost none
-        of them know about each other. Each one thinks it has a landlord problem.
+        There are hundreds of buildings in this state in exactly this position, and almost none of
+        them know about each other. Each one thinks it has a landlord problem.
       </p>
       <p style="color:#a9bad3;margin-top:14px;font-size:18px;line-height:1.75">
-        It doesn't. It has a <strong style="color:#fff">program</strong> problem — and there are
+        It doesn't. It has a <strong style="color:#fff">programme</strong> problem — and there are
         hundreds of us.
       </p>
       <p style="color:#8fa3c0;margin-top:20px;font-size:15px">
@@ -218,16 +408,16 @@ description: Affordable housing is not disappearing. It is expiring by design. A
       <p hidden><label>Skip: <input name="bot-field"></label></p>
 
       <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8fa3c0;margin-bottom:7px">Your name</label>
-      <input name="name" type="text" required style="width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;background:#ffffff0f;color:#fff;font-family:inherit;font-size:15px">
+      <input name="name" type="text" required style="width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;background:#ffffff0f;color:#fff;font-family:inherit;font-size:16px">
 
       <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8fa3c0;margin:16px 0 7px">Email</label>
-      <input name="email" type="email" required style="width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;background:#ffffff0f;color:#fff;font-family:inherit;font-size:15px">
+      <input name="email" type="email" required style="width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;background:#ffffff0f;color:#fff;font-family:inherit;font-size:16px">
 
       <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8fa3c0;margin:16px 0 7px">Your building's address <span style="text-transform:none;letter-spacing:0;font-weight:500">(if you're in one)</span></label>
-      <input name="address" type="text" style="width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;background:#ffffff0f;color:#fff;font-family:inherit;font-size:15px">
+      <input name="address" type="text" style="width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;background:#ffffff0f;color:#fff;font-family:inherit;font-size:16px">
 
       <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8fa3c0;margin:16px 0 7px">What's happening where you live?</label>
-      <textarea name="story" rows="4" style="width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;background:#ffffff0f;color:#fff;font-family:inherit;font-size:15px" placeholder="Expiration date, landlord, tenants association…"></textarea>
+      <textarea name="story" rows="4" style="width:100%;padding:13px 14px;border-radius:12px;border:1px solid #ffffff2b;background:#ffffff0f;color:#fff;font-family:inherit;font-size:16px" placeholder="Expiration date, landlord, tenants association…"></textarea>
 
       <button type="submit" class="btn btn-gold" style="width:100%;margin-top:20px;padding:15px">Add my name</button>
       <p style="margin-top:12px;font-size:13px;color:#8fa3c0;line-height:1.6">
@@ -238,7 +428,5 @@ description: Affordable housing is not disappearing. It is expiring by design. A
 </section>
 
 <style>
-  @media(max-width:900px){
-    #join .container{grid-template-columns:1fr !important}
-  }
+  @media(max-width:900px){ #join .container{grid-template-columns:1fr !important} }
 </style>

@@ -1,1 +1,1 @@
-NHPD New York LIHTC export goes here (Program=LIHTC, Status=Active + Inconclusive, State=NY)
+NHPD NY LIHTC export goes here (Program=LIHTC, Status=Active + Inconclusive, State=NY)
